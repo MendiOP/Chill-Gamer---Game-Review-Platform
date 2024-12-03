@@ -1,0 +1,1 @@
+console.log("created client folder and tested js file");
