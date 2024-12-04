@@ -1,7 +1,47 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import { useContext, useState } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { AuthContext } from "../../AuthContext/AuthContext";
 
 const Login = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState(false);
+  const location = useLocation();
+  const navigate = useNavigate();
+  const from = location.state?.from?.pathname || "/";
+  localStorage.setItem("email", email);
+
+  const { signInUser, signInWithGoogle } = useContext(AuthContext);
+
+  const handleLogin = (event) => {
+    event.preventDefault();
+
+    signInUser(email, password)
+      .then((user) => {
+        console.log(user);
+        navigate(from, { replace: true });
+      })
+      .catch((error) => {
+        setError(true);
+      });
+
+    setEmail("");
+    setPassword("");
+    setError("");
+  };
+
+  const handleGoogleLogin = () => {
+    signInWithGoogle()
+      .then((result) => {
+        const user = result.user;
+        console.log("Google Sign-In successful:", user);
+        navigate(from, { replace: true });
+      })
+      .catch((error) => {
+        console.error("Google Sign-In error:", error);
+      });
+  };
+
   return (
     <div className="flex min-h-screen items-center justify-center bg-gray-100 px-4">
       <div className="w-full max-w-md bg-white p-8 rounded-xl shadow-md space-y-6">
@@ -10,7 +50,7 @@ const Login = () => {
           Login to Your Account
         </h1>
 
-        <form className="space-y-5">
+        <form className="space-y-5" onSubmit={handleLogin}>
           {/* Email Input */}
           <div>
             <label className="block mb-2 text-lg font-semibold text-gray-600">
@@ -31,6 +71,8 @@ const Login = () => {
               <input
                 type="email"
                 className="w-full px-4 py-2 text-gray-700 focus:outline-none"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
                 placeholder="Enter your email"
                 required
               />
@@ -60,10 +102,23 @@ const Login = () => {
               <input
                 type="password"
                 className="w-full px-4 py-2 text-gray-700 focus:outline-none"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
                 placeholder="Enter your password"
                 required
               />
             </div>
+          </div>
+
+          {/* Error Message for invalid login */}
+          <div className="mb-4">
+            {error && (
+              <div className="flex items-center p-4 bg-red-100 border border-red-400 text-red-700 rounded-lg">
+                <p className="text-base font-bold">
+                  Invalid credentials or login issue. Try again.
+                </p>
+              </div>
+            )}
           </div>
 
           {/* Login Button */}
@@ -77,7 +132,10 @@ const Login = () => {
 
         {/* Google Login */}
         <div className="text-center">
-          <button className="w-full py-2 flex items-center justify-center gap-2 border rounded-lg text-gray-700 bg-white hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-300">
+          <button
+            onClick={handleGoogleLogin}
+            className="w-full py-2 flex items-center justify-center gap-2 border rounded-lg text-gray-700 bg-white hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-300"
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 48 48"

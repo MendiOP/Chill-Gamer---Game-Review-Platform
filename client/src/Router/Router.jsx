@@ -7,6 +7,7 @@ import Error from "./../Components/ErrorPage/Error";
 import GameWatchlist from "./../Components/GameWatchlist/GameWatchlist";
 import Login from "./../Components/Login/Login";
 import MyReviews from "./../Components/MyReviews/MyReviews";
+import PrivateRoute from "./../Components/PrivateRoute/PrivateRoute";
 import Register from "./../Components/Register/Register";
 
 const router = createBrowserRouter([
@@ -20,15 +21,27 @@ const router = createBrowserRouter([
       },
       {
         path: "/addreview",
-        element: <Addreview></Addreview>,
+        element: (
+          <PrivateRoute>
+            <Addreview></Addreview>
+          </PrivateRoute>
+        ),
       },
       {
         path: "/myreviews",
-        element: <MyReviews></MyReviews>,
+        element: (
+          <PrivateRoute>
+            <MyReviews></MyReviews>
+          </PrivateRoute>
+        ),
       },
       {
         path: "/gamewatchlist",
-        element: <GameWatchlist></GameWatchlist>,
+        element: (
+          <PrivateRoute>
+            <GameWatchlist></GameWatchlist>
+          </PrivateRoute>
+        ),
       },
       {
         path: "/login",

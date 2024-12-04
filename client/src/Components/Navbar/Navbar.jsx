@@ -1,8 +1,12 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import logo from "../../assets/logo.jpg";
+import demouser from "../../assets/demouser.png";
+import { AuthContext } from "../../AuthContext/AuthContext";
 
 const Navbar = () => {
+  const { user } = useContext(AuthContext);
+
   return (
     <div className="navbar bg-white shadow-md">
       <div className="navbar-start">
@@ -35,26 +39,32 @@ const Navbar = () => {
                 Home
               </Link>
             </li>
+
             <li>
               <Link to="/allreviews" className="hover:text-blue-600">
                 All Reviews
               </Link>
             </li>
-            <li>
-              <Link to="/addreview" className="hover:text-blue-600">
-                Add Review
-              </Link>
-            </li>
-            <li>
-              <Link to="/myreviews" className="hover:text-blue-600">
-                My Reviews
-              </Link>
-            </li>
-            <li>
-              <Link to="/gamewatchlist" className="hover:text-blue-600">
-                Game Watchlist
-              </Link>
-            </li>
+            {/* private routes */}
+            {user && (
+              <>
+                <li>
+                  <Link to="/addreview" className="hover:text-blue-600">
+                    Add Review
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/myreviews" className="hover:text-blue-600">
+                    My Reviews
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/gamewatchlist" className="hover:text-blue-600">
+                    Game Watchlist
+                  </Link>
+                </li>
+              </>
+            )}
           </ul>
         </div>
 
@@ -84,34 +94,41 @@ const Navbar = () => {
               All Reviews
             </Link>
           </li>
-          <li>
-            <Link to="/addreview" className="hover:text-blue-600">
-              Add Review
-            </Link>
-          </li>
-          <li>
-            <Link to="/myreviews" className="hover:text-blue-600">
-              My Reviews
-            </Link>
-          </li>
-          <li>
-            <Link to="/gamewatchlist" className="hover:text-blue-600">
-              Game Watchlist
-            </Link>
-          </li>
+          {user && (
+            <>
+              <li>
+                <Link to="/addreview" className="hover:text-blue-600">
+                  Add Review
+                </Link>
+              </li>
+              <li>
+                <Link to="/myreviews" className="hover:text-blue-600">
+                  My Reviews
+                </Link>
+              </li>
+              <li>
+                <Link to="/gamewatchlist" className="hover:text-blue-600">
+                  Game Watchlist
+                </Link>
+              </li>
+            </>
+          )}
         </ul>
       </div>
 
-      <div className="navbar-end space-x-3 ">
+      <div className="navbar-end space-x-3">
+        <button className="w-8 h-8 p-1 md:w-12 md:h-12 rounded-full border border-gray-500 flex justify-center items-center">
+          <img src={user ? user.photoURL : demouser} alt="" />
+        </button>
         <Link
           to="/login"
-          className="btn btn-outline border-gray-300 text-gray-700 hover:border-gray-500 hover:bg-gray-500 text-lg"
+          className="btn btn-outline border-gray-300 text-gray-700 hover:border-gray-500 hover:bg-gray-500 text-sm md:text-base"
         >
           Login
         </Link>
         <Link
           to="/register"
-          className="btn bg-blue-500 text-white text-lg hover:bg-blue-600"
+          className="btn bg-blue-500 text-white text-sm md:text-base"
         >
           Register
         </Link>
