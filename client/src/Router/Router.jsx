@@ -13,34 +13,36 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: <Home></Home>,
-  },
-  {
-    path: "/allreviews",
-    element: <Allreviews></Allreviews>,
-  },
-  {
-    path: "/addreview",
-    element: <Addreview></Addreview>,
-  },
-  {
-    path: "/myreviews",
-    element: <MyReviews></MyReviews>,
-  },
-  {
-    path: "/gamewatchlist",
-    element: <GameWatchlist></GameWatchlist>,
-  },
-  {
-    path: "/login",
-    element: <Login></Login>,
-  },
-  {
-    path: "/register",
-    element: <Register></Register>,
-  },
-  {
-    path: "*",
-    element: <Error></Error>,
+    children: [
+      {
+        path: "/allreviews",
+        element: <Allreviews></Allreviews>,
+      },
+      {
+        path: "/addreview",
+        element: <Addreview></Addreview>,
+      },
+      {
+        path: "/myreviews",
+        element: <MyReviews></MyReviews>,
+      },
+      {
+        path: "/gamewatchlist",
+        element: <GameWatchlist></GameWatchlist>,
+      },
+      {
+        path: "/login",
+        element: <Login></Login>,
+      },
+      {
+        path: "/register",
+        element: <Register></Register>,
+      },
+      {
+        path: "*",
+        element: <Error></Error>,
+      },
+    ],
   },
 ]);
 
