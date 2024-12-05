@@ -1,9 +1,20 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { updateProfile } from "firebase/auth";
+import React, { useContext, useState } from "react";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
+import { Link, Navigate } from "react-router-dom";
+import { AuthContext } from "../../AuthContext/AuthContext";
 
 const Register = () => {
   const [password, setPassword] = useState("");
   const [passwordError, setPasswordError] = useState("");
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [photoUrl, setPhotoUrl] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [isRegistered, setIsRegistered] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
+
+  const { createUser } = useContext(AuthContext);
 
   const validatePassword = (value) => {
     const hasUppercase = /[A-Z]/.test(value);
@@ -23,6 +34,49 @@ const Register = () => {
     setPassword(value);
   };
 
+  const handleFormSubmit = (event) => {
+    event.preventDefault();
+    setLoading(true);
+    createUser(email, password)
+      .then((userCredential) => {
+        const user = userCredential.user;
+
+        return updateProfile(user, {
+          displayName: name,
+          photoURL: photoUrl,
+        }).then(() => {
+          console.log("Registration successful!");
+          setIsRegistered(true);
+        });
+      })
+      .catch((error) => {
+        setPasswordError(error.message);
+        console.error(error);
+      })
+      .finally(() => setLoading(false));
+
+    setEmail("");
+    setName("");
+    setPhotoUrl("");
+    setPassword("");
+  };
+
+  if (isRegistered) {
+    console.log("Redirecting to login...");
+    return <Navigate to="/" />;
+  }
+
+  if (loading) {
+    return (
+      <div className="flex justify-center items-center min-h-screen">
+        <div className="loader ease-linear rounded-full border-4 border-t-4 border-gray-200 h-12 w-12"></div>
+        <p className="ml-4 text-lg font-semibold">
+          Registering, please wait...
+        </p>
+      </div>
+    );
+  }
+
   return (
     <div className="flex min-h-screen items-center justify-center bg-gray-100 px-4">
       <div className="w-full max-w-lg bg-white p-8 rounded-xl shadow-md space-y-6">
@@ -30,7 +84,7 @@ const Register = () => {
           Create an Account
         </h1>
 
-        <form className="space-y-5">
+        <form className="space-y-5" onSubmit={handleFormSubmit}>
           {/* Name Input */}
           <div>
             <label className="block mb-2 text-lg font-semibold text-gray-600">
@@ -40,6 +94,7 @@ const Register = () => {
               type="text"
               className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring focus:ring-blue-300"
               placeholder="Enter your full name"
+              onChange={(e) => setName(e.target.value)}
               required
             />
           </div>
@@ -53,6 +108,7 @@ const Register = () => {
               type="email"
               className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring focus:ring-blue-300"
               placeholder="Enter your email"
+              onChange={(e) => setEmail(e.target.value)}
               required
             />
           </div>
@@ -65,27 +121,38 @@ const Register = () => {
             <input
               type="url"
               className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring focus:ring-blue-300"
+              onChange={(e) => setPhotoUrl(e.target.value)}
               placeholder="Enter your photo URL"
             />
           </div>
 
           {/* Password Input */}
-          <div>
+          <div className="relative">
             <label className="block mb-2 text-lg font-semibold text-gray-600">
               Password
             </label>
-            <input
-              type="password"
-              className={`w-full px-4 py-2 border rounded-lg focus:outline-none ${
-                passwordError
-                  ? "border-red-500"
-                  : "focus:ring focus:ring-blue-300"
-              }`}
-              value={password}
-              onChange={(e) => validatePassword(e.target.value)}
-              placeholder="Create a strong password"
-              required
-            />
+            <div className="relative">
+              <input
+                type={showPassword ? "text" : "password"}
+                className={`w-full px-4 py-2 pr-10 border rounded-lg focus:outline-none ${
+                  passwordError
+                    ? "border-red-500"
+                    : "focus:ring focus:ring-blue-300"
+                }`}
+                value={password}
+                onChange={(e) => validatePassword(e.target.value)}
+                placeholder="Create a strong password"
+                required
+              />
+              <button
+                type="button"
+                onClick={() => setShowPassword(!showPassword)}
+                className="absolute inset-y-0 right-3 flex items-center text-gray-500 cursor-pointer"
+              >
+                {showPassword ? <FaEyeSlash /> : <FaEye />}
+              </button>
+            </div>
+
             {/* Password Error Message */}
             {passwordError && (
               <p className="mt-2 text-sm text-red-500">{passwordError}</p>

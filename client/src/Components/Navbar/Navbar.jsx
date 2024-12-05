@@ -1,11 +1,15 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
-import logo from "../../assets/logo.jpg";
 import demouser from "../../assets/demouser.png";
+import logo from "../../assets/logo.jpg";
 import { AuthContext } from "../../AuthContext/AuthContext";
 
 const Navbar = () => {
-  const { user } = useContext(AuthContext);
+  const { user, signOutUser } = useContext(AuthContext);
+
+  const handleSignOut = () => {
+    signOutUser();
+  };
 
   return (
     <div className="navbar bg-white shadow-md">
@@ -35,7 +39,7 @@ const Navbar = () => {
             className="menu menu-sm dropdown-content bg-white rounded-box z-10 mt-3 w-52 shadow-lg text-gray-600 text-base font-semibold"
           >
             <li>
-              <Link to="/home" className="hover:text-blue-600">
+              <Link to="/" className="hover:text-blue-600">
                 Home
               </Link>
             </li>
@@ -85,7 +89,7 @@ const Navbar = () => {
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal px-1 space-x-3 text-gray-600 text-base font-semibold">
           <li>
-            <Link to="/home" className="hover:text-blue-600">
+            <Link to="/" className="hover:text-blue-600">
               Home
             </Link>
           </li>
@@ -117,21 +121,39 @@ const Navbar = () => {
       </div>
 
       <div className="navbar-end space-x-3">
-        <button className="w-8 h-8 p-1 md:w-12 md:h-12 rounded-full border border-gray-500 flex justify-center items-center">
-          <img src={user ? user.photoURL : demouser} alt="" />
+        <button
+          className="w-8 h-8 md:w-12 md:h-12 rounded-full border border-gray-500 flex justify-center items-center tooltip"
+          data-tip={user ? user.displayName : "Demo User"}
+        >
+          <img
+            src={user ? user.photoURL : demouser}
+            className="rounded-full"
+            alt=""
+          />
         </button>
-        <Link
-          to="/login"
-          className="btn btn-outline border-gray-300 text-gray-700 hover:border-gray-500 hover:bg-gray-500 text-sm md:text-base"
-        >
-          Login
-        </Link>
-        <Link
-          to="/register"
-          className="btn bg-blue-500 text-white text-sm md:text-base"
-        >
-          Register
-        </Link>
+        {!user ? (
+          <>
+            <Link
+              to="/login"
+              className="btn btn-outline border-gray-300 text-gray-700 hover:border-gray-500 hover:bg-gray-500 text-sm md:text-base"
+            >
+              Login
+            </Link>
+            <Link
+              to="/register"
+              className="btn bg-blue-500 text-white text-sm md:text-base"
+            >
+              Register
+            </Link>
+          </>
+        ) : (
+          <button
+            onClick={handleSignOut}
+            className="px-4 py-2 bg-purple-500 text-white font-semibold rounded-lg hover:bg-purple-600 text-sm sm:text-base md:text-lg transition-shadow shadow-md hover:shadow-lg"
+          >
+            Log Out
+          </button>
+        )}
       </div>
     </div>
   );

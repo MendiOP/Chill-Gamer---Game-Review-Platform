@@ -1,13 +1,15 @@
 import { useContext, useState } from "react";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../AuthContext/AuthContext";
-
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
   const from = location.state?.from?.pathname || "/";
   localStorage.setItem("email", email);
 
@@ -16,6 +18,7 @@ const Login = () => {
   const handleLogin = (event) => {
     event.preventDefault();
 
+    setLoading(true);
     signInUser(email, password)
       .then((user) => {
         console.log(user);
@@ -23,7 +26,8 @@ const Login = () => {
       })
       .catch((error) => {
         setError(true);
-      });
+      })
+      .finally(() => setLoading(false));
 
     setEmail("");
     setPassword("");
@@ -41,6 +45,15 @@ const Login = () => {
         console.error("Google Sign-In error:", error);
       });
   };
+
+  if (loading) {
+    return (
+      <div className="flex justify-center items-center min-h-screen">
+        <div className="loader ease-linear rounded-full border-4 border-t-4 border-gray-200 h-12 w-12"></div>
+        <p className="ml-4 text-lg font-semibold">Logging, please wait...</p>
+      </div>
+    );
+  }
 
   return (
     <div className="flex min-h-screen items-center justify-center bg-gray-100 px-4">
@@ -78,14 +91,14 @@ const Login = () => {
               />
             </div>
           </div>
-
           {/* Password Input */}
           <div>
             <label className="block mb-2 text-lg font-semibold text-gray-600">
               Password
             </label>
-            <div className="flex items-center border rounded-lg overflow-hidden">
-              <span className="flex items-center px-4  text-gray-500">
+            <div className="flex items-center border rounded-lg overflow-hidden relative">
+              {/* Lock Icon */}
+              <span className="flex items-center px-4 text-gray-500">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 16 16"
@@ -99,17 +112,31 @@ const Login = () => {
                   />
                 </svg>
               </span>
+
+              {/* Password Input */}
               <input
-                type="password"
+                type={showPassword ? "text" : "password"}
                 className="w-full px-4 py-2 text-gray-700 focus:outline-none"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="Enter your password"
                 required
               />
+
+              {/* Eye Icon for Toggling Password Visibility */}
+              <button
+                type="button"
+                onClick={() => setShowPassword(!showPassword)}
+                className="absolute right-3 text-gray-500"
+              >
+                {showPassword ? (
+                  <FaEyeSlash className="h-5 w-5" />
+                ) : (
+                  <FaEye className="h-5 w-5" />
+                )}
+              </button>
             </div>
           </div>
-
           {/* Error Message for invalid login */}
           <div className="mb-4">
             {error && (
@@ -120,7 +147,6 @@ const Login = () => {
               </div>
             )}
           </div>
-
           {/* Login Button */}
           <button
             type="submit"
