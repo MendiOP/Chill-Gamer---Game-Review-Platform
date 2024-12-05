@@ -27,12 +27,25 @@ const AddNewReview = () => {
 
     console.log("Review submitted:", reviewData);
 
-    Swal.fire({
-      title: "Success!",
-      text: "Your review has been submitted.",
-      icon: "success",
-      confirmButtonText: "OK",
-    });
+    fetch("http://localhost:5000/addReview", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(reviewData),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        if (data.insertedId) {
+          Swal.fire({
+            title: "Success!",
+            text: "Your review has been submitted.",
+            icon: "success",
+            confirmButtonText: "OK",
+          });
+        }
+      });
 
     // Reset form
     setGameCover("");
