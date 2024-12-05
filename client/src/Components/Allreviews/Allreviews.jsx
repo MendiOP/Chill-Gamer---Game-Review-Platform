@@ -23,6 +23,7 @@ const Allreviews = () => {
           return (
             <ReviewCard
               key={review._id}
+              id={review._id}
               genre={review.genre}
               year={review.publishingYear}
               rating={review.rating}

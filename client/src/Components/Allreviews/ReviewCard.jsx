@@ -1,16 +1,7 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
-const ReviewCard = ({
-  key,
-  image,
-  title,
-  review,
-  rating,
-  year,
-  genre,
-  reviewerName,
-  reviewerEmail,
-}) => {
+const ReviewCard = ({ id, image, title, review, rating, year, genre }) => {
   const stars = Array(5)
     .fill(false)
     .map((_, index) => index < rating);
@@ -48,7 +39,7 @@ const ReviewCard = ({
         </div>
       </div>
       <button className="w-1/2 py-2 bg-teal-500 text-white text-center font-semibold rounded-lg mt-3 mb-2 transform transition-all duration-200 ease-in-out hover:bg-teal-600 active:scale-95 mx-auto">
-        Explore Details
+        <Link to={`/review/${id}`}>Explore Details</Link>
       </button>
     </div>
   );

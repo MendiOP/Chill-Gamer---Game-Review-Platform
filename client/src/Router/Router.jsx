@@ -1,6 +1,7 @@
 import React from "react";
 import { createBrowserRouter } from "react-router-dom";
 import Home from "../Components/Home/Home";
+import ReviewDetails from "../Components/ReviewDetails/ReviewDetails";
 import Addreview from "./../Components/AddReview/Addreview";
 import Allreviews from "./../Components/Allreviews/Allreviews";
 import Error from "./../Components/ErrorPage/Error";
@@ -24,6 +25,16 @@ const router = createBrowserRouter([
         element: (
           <PrivateRoute>
             <Addreview></Addreview>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/review/:id",
+        loader: ({ params }) =>
+          fetch(`http://localhost:5000/reviews/${params.id}`),
+        element: (
+          <PrivateRoute>
+            <ReviewDetails></ReviewDetails>
           </PrivateRoute>
         ),
       },
