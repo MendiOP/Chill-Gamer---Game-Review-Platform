@@ -57,6 +57,9 @@ const GameWatchlist = () => {
 
   return (
     <div className="overflow-x-auto p-4 bg-gray-50">
+      <h1 className="text-center font-bold text-3xl mt-10">
+        Your Watchlist: Favorites{" "}
+      </h1>
       <table className="table w-full border-collapse mt-6 bg-white shadow-lg rounded-lg hidden md:table">
         <thead className="bg-teal-500 text-white">
           <tr>

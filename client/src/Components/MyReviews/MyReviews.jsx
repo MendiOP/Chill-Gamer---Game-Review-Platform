@@ -14,9 +14,8 @@ const MyReviews = () => {
     fetch(`http://localhost:5000/myReviews?email=${user.email}`)
       .then((res) => res.json())
       .then((data) => {
-        // console.log(data);
         setReviews(data);
-        setTimeout(() => setLoading(false), 500);
+        setTimeout(() => setLoading(false), 5000);
       });
   }, [user?.email]);
 
@@ -77,7 +76,7 @@ const MyReviews = () => {
 
   return (
     <div className="p-4">
-      <h1 className="text-3xl font-bold text-center mb-6 text-indigo-600">
+      <h1 className="text-3xl font-bold text-center mb-6 text-black">
         Game Reviews
       </h1>
       <div className="overflow-x-auto">
