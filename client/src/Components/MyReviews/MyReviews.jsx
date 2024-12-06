@@ -1,4 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import Swal from "sweetalert2";
 import { AuthContext } from "../../AuthContext/AuthContext";
 
 const MyReviews = () => {
@@ -14,18 +16,30 @@ const MyReviews = () => {
       });
   }, [user?.email]);
 
-  // Handlers for Update and Delete
-  const handleUpdate = (id) => {
-    alert(`Update button clicked for Review ID: ${id}`);
-  };
-
   const handleDelete = (id) => {
-    const confirmed = window.confirm(
-      "Are you sure you want to delete this review?"
-    );
-    if (confirmed) {
-      setReviews(reviews.filter((review) => review.id !== id));
-    }
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        fetch(`http://localhost:5000/deleteReview/${id}`, {
+          method: "DELETE",
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            if (data.deletedCount > 0) {
+              Swal.fire("Deleted!", "Your review has been deleted.", "success");
+              const newReviews = reviews.filter((review) => review._id !== id);
+              setReviews(newReviews);
+            }
+          });
+      }
+    });
   };
 
   return (
@@ -49,7 +63,7 @@ const MyReviews = () => {
           <tbody>
             {reviews.map((review) => (
               <tr
-                key={review.id}
+                key={review._id}
                 className="hover:bg-indigo-100 transition-all text-lg"
               >
                 <td className="p-4 border-b">{review.gameTitle}</td>
@@ -63,15 +77,12 @@ const MyReviews = () => {
                 </td>
                 <td className="p-4 border-b">{review.genre}</td>
                 <td className="p-4 border-b space-y-2">
-                  <button
-                    className="bg-blue-500 text-white px-4 py-2 rounded-lg mr-4 hover:bg-blue-600 transition"
-                    onClick={() => handleUpdate(review.id)}
-                  >
-                    Update
+                  <button className="bg-blue-500 text-white px-4 py-2 rounded-lg mr-4 hover:bg-blue-600 transition">
+                    <Link to={`/updateReview/${review._id}`}>Update</Link>
                   </button>
                   <button
                     className="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600 transition"
-                    onClick={() => handleDelete(review.id)}
+                    onClick={() => handleDelete(review._id)}
                   >
                     Delete
                   </button>
