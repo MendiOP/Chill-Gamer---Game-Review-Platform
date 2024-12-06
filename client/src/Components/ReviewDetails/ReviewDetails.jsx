@@ -2,49 +2,59 @@ import React, { useContext } from "react";
 import { useLoaderData } from "react-router-dom";
 import Swal from "sweetalert2";
 import { AuthContext } from "../../AuthContext/AuthContext";
-import { WatchlistContext } from "../../WatchlistContext/WatchlistContext";
 
 const ReviewDetails = () => {
   const gameData = useLoaderData();
   const { user } = useContext(AuthContext);
-  const { watchlist, addToWatchlist } = useContext(WatchlistContext);
 
   // making new object to send to the watchlist db;
-  gameData.myName = user.displayName;
-  gameData.myEmail = user.email;
+  const watchListGameData = {
+    gameCover: gameData.gameCover,
+    gameTitle: gameData.gameTitle,
+    genre: gameData.genre,
+    publishingYear: gameData.publishingYear,
+    rating: gameData.rating,
+    reviewDescription: gameData.reviewDescription,
+    userName: gameData.userName,
+    userEmail: gameData.userEmail,
+    myName: user.displayName,
+    myEmail: user.email,
+  };
 
-  console.log(gameData);
+  console.log(watchListGameData);
 
+  // probably the best function i wrote in this project
   const handleWatchlist = () => {
-    if (watchlist.includes(gameData._id)) {
-      return Swal.fire({
-        title: "Oopps!",
-        text: "You Have Already Added This Review To Your Watchlist",
-        icon: "error",
-        confirmButtonText: "OK",
-      });
-    }
-
-    addToWatchlist(gameData._id);
-
     fetch("http://localhost:5000/watchlist", {
       method: "POST",
       headers: {
         "content-type": "application/json",
       },
-      body: JSON.stringify(gameData),
+      body: JSON.stringify(watchListGameData),
     })
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(data);
-        if (data.insertedId) {
-          Swal.fire({
-            title: "Success!",
-            text: "Review is added to your watchlist",
-            icon: "success",
-            confirmButtonText: "OK",
+      .then((res) => {
+        if (!res.ok) {
+          return res.json().then((error) => {
+            throw new Error(error.message);
           });
         }
+        return res.json();
+      })
+      .then((data) => {
+        Swal.fire({
+          title: "Success!",
+          text: data.message,
+          icon: "success",
+          confirmButtonText: "OK",
+        });
+      })
+      .catch((error) => {
+        Swal.fire({
+          title: "Oops!",
+          text: error.message,
+          icon: "error",
+          confirmButtonText: "OK",
+        });
       });
   };
 

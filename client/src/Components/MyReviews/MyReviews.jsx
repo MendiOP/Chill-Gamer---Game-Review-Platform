@@ -73,7 +73,7 @@ const MyReviews = () => {
                     : review.reviewDescription}
                 </td>
                 <td className="p-4 border-b hidden md:table-cell">
-                  {review.rating}
+                  {review.rating}/5
                 </td>
                 <td className="p-4 border-b">{review.genre}</td>
                 <td className="p-4 border-b space-y-2">

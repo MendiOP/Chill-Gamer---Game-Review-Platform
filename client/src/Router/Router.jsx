@@ -1,5 +1,6 @@
 import React from "react";
 import { createBrowserRouter } from "react-router-dom";
+import HighestRated from "../Components/HighestRatedSection/HighestRated";
 import Home from "../Components/Home/Home";
 import ReviewDetails from "../Components/ReviewDetails/ReviewDetails";
 import Update from "../Update/Update";
@@ -72,6 +73,10 @@ const router = createBrowserRouter([
       {
         path: "/register",
         element: <Register></Register>,
+      },
+      {
+        path: "/highestrated",
+        element: <HighestRated></HighestRated>,
       },
       {
         path: "*",

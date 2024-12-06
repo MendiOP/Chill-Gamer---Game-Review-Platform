@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import demouser from "../../assets/demouser.png";
 import logo from "../../assets/logo.jpg";
 import { AuthContext } from "../../AuthContext/AuthContext";
@@ -39,33 +39,68 @@ const Navbar = () => {
             className="menu menu-sm dropdown-content bg-white rounded-box z-10 mt-3 w-52 shadow-lg text-gray-600 text-base font-semibold"
           >
             <li>
-              <Link to="/" className="hover:text-blue-600">
+              <NavLink
+                to="/"
+                className={({ isActive }) =>
+                  isActive
+                    ? "hover:text-blue-600 active"
+                    : "hover:text-blue-600"
+                }
+              >
                 Home
-              </Link>
+              </NavLink>
             </li>
 
             <li>
-              <Link to="/allreviews" className="hover:text-blue-600">
+              <NavLink
+                to="/allreviews"
+                className={({ isActive }) =>
+                  isActive
+                    ? "hover:text-blue-600 active"
+                    : "hover:text-blue-600"
+                }
+              >
                 All Reviews
-              </Link>
+              </NavLink>
             </li>
             {/* private routes */}
             {user && (
               <>
                 <li>
-                  <Link to="/addreview" className="hover:text-blue-600">
+                  <NavLink
+                    to="/addreview"
+                    className={({ isActive }) =>
+                      isActive
+                        ? "hover:text-blue-600 active"
+                        : "hover:text-blue-600"
+                    }
+                  >
                     Add Review
-                  </Link>
+                  </NavLink>
                 </li>
                 <li>
-                  <Link to="/myreviews" className="hover:text-blue-600">
+                  <NavLink
+                    to="/myreviews"
+                    className={({ isActive }) =>
+                      isActive
+                        ? "hover:text-blue-600 active"
+                        : "hover:text-blue-600"
+                    }
+                  >
                     My Reviews
-                  </Link>
+                  </NavLink>
                 </li>
                 <li>
-                  <Link to="/gamewatchlist" className="hover:text-blue-600">
+                  <NavLink
+                    to="/gamewatchlist"
+                    className={({ isActive }) =>
+                      isActive
+                        ? "hover:text-blue-600 active"
+                        : "hover:text-blue-600"
+                    }
+                  >
                     Game Watchlist
-                  </Link>
+                  </NavLink>
                 </li>
               </>
             )}
@@ -89,31 +124,62 @@ const Navbar = () => {
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal px-1 space-x-3 text-gray-600 text-base font-semibold">
           <li>
-            <Link to="/" className="hover:text-blue-600">
+            <NavLink
+              to="/"
+              className={({ isActive }) =>
+                isActive ? "hover:text-blue-600 active" : "hover:text-blue-600"
+              }
+            >
               Home
-            </Link>
+            </NavLink>
           </li>
           <li>
-            <Link to="/allreviews" className="hover:text-blue-600">
+            <NavLink
+              to="/allreviews"
+              className={({ isActive }) =>
+                isActive ? "hover:text-blue-600 active" : "hover:text-blue-600"
+              }
+            >
               All Reviews
-            </Link>
+            </NavLink>
           </li>
           {user && (
             <>
               <li>
-                <Link to="/addreview" className="hover:text-blue-600">
+                <NavLink
+                  to="/addreview"
+                  className={({ isActive }) =>
+                    isActive
+                      ? "hover:text-blue-600 active"
+                      : "hover:text-blue-600"
+                  }
+                >
                   Add Review
-                </Link>
+                </NavLink>
               </li>
               <li>
-                <Link to="/myreviews" className="hover:text-blue-600">
+                <NavLink
+                  to="/myreviews"
+                  className={({ isActive }) =>
+                    isActive
+                      ? "hover:text-blue-600 active"
+                      : "hover:text-blue-600"
+                  }
+                >
                   My Reviews
-                </Link>
+                </NavLink>
               </li>
               <li>
-                <Link to="/gamewatchlist" className="hover:text-blue-600">
+                <NavLink
+                  to="/gamewatchlist"
+                  className={({ isActive }) =>
+                    isActive
+                      ? "hover:text-blue-600 active"
+                      : "hover:text-blue-600"
+                  }
+                >
                   Game Watchlist
-                </Link>
+                </NavLink>
               </li>
             </>
           )}

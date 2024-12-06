@@ -75,7 +75,7 @@ const ImageSlider = () => {
 
   return (
     <div className="max-w-4xl mx-auto my-8">
-      <h2 className="text-center text-2xl font-bold mb-6">
+      <h2 className="text-center text-3xl font-bold mb-6">
         Discover Exciting Games to Play!
       </h2>
       <Slider {...sliderSettings}>

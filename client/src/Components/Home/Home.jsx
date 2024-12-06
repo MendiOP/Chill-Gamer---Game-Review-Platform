@@ -2,6 +2,7 @@ import React from "react";
 import { Outlet, useLocation } from "react-router-dom";
 import Footer from "../Footer/Footer";
 import Header from "../Header/Header";
+import HighestRated from "../HighestRatedSection/HighestRated";
 import Slider from "../Slider/Slider";
 
 const Home = () => {
@@ -18,6 +19,9 @@ const Home = () => {
         {isHomePath && (
           <>
             <Slider></Slider>
+            <hr className="mt-12" />
+            <HighestRated></HighestRated>
+            <hr className="mt-12 mb-12" />
           </>
         )}
         <Outlet></Outlet>
