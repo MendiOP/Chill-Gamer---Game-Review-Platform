@@ -1,9 +1,52 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useLoaderData } from "react-router-dom";
+import Swal from "sweetalert2";
+import { AuthContext } from "../../AuthContext/AuthContext";
+import { WatchlistContext } from "../../WatchlistContext/WatchlistContext";
 
 const ReviewDetails = () => {
   const gameData = useLoaderData();
+  const { user } = useContext(AuthContext);
+  const { watchlist, addToWatchlist } = useContext(WatchlistContext);
+
+  // making new object to send to the watchlist db;
+  gameData.myName = user.displayName;
+  gameData.myEmail = user.email;
+
   console.log(gameData);
+
+  const handleWatchlist = () => {
+    if (watchlist.includes(gameData._id)) {
+      return Swal.fire({
+        title: "Oopps!",
+        text: "You Have Already Added This Review To Your Watchlist",
+        icon: "error",
+        confirmButtonText: "OK",
+      });
+    }
+
+    addToWatchlist(gameData._id);
+
+    fetch("http://localhost:5000/watchlist", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(gameData),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        if (data.insertedId) {
+          Swal.fire({
+            title: "Success!",
+            text: "Review is added to your watchlist",
+            icon: "success",
+            confirmButtonText: "OK",
+          });
+        }
+      });
+  };
 
   return (
     <div className="container mx-auto p-6 bg-gradient-to-b from-gray-50 to-gray-200 shadow-lg rounded-lg">
@@ -82,7 +125,10 @@ const ReviewDetails = () => {
 
           {/* Watchlist Button */}
           <div className="mt-6">
-            <button className="btn btn-primary btn-wide text-lg font-bold">
+            <button
+              onClick={handleWatchlist}
+              className="btn btn-primary btn-wide text-lg font-bold"
+            >
               Add to Watchlist
             </button>
           </div>
