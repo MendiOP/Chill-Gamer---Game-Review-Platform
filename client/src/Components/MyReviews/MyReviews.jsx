@@ -2,17 +2,21 @@ import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
 import { AuthContext } from "../../AuthContext/AuthContext";
+import sad from "../../assets/sad.gif";
 
 const MyReviews = () => {
   const { user } = useContext(AuthContext);
   const [reviews, setReviews] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
+    setLoading(true);
     fetch(`http://localhost:5000/myReviews?email=${user.email}`)
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
+        // console.log(data);
         setReviews(data);
+        setTimeout(() => setLoading(false), 500);
       });
   }, [user?.email]);
 
@@ -41,6 +45,35 @@ const MyReviews = () => {
       }
     });
   };
+
+  // default div to show nothing in yourreviews
+  if (reviews.length === 0) {
+    return (
+      <div className="text-center text-2xl mt-16 p-8 bg-gray-100 border-2 border-gray-300 rounded-lg shadow-md max-w-md mx-auto">
+        <div className="text-purple-600 font-bold text-3xl mb-6">
+          No reviews in your list.
+        </div>
+        <img
+          src={sad}
+          alt="sad"
+          className="w-1/2 rounded-xl mx-auto mb-6" // Adjust size and spacing for the image
+        />
+        <div className="text-gray-700 text-xl font-semibold">
+          You haven't added any reviews to the community yet. Start browsing and
+          write your favorites!
+        </div>
+      </div>
+    );
+  }
+
+  if (reviews.length === 0 && loading) {
+    return (
+      <div className="flex justify-center items-center min-h-screen">
+        <div className="loader ease-linear rounded-full border-4 border-t-4 border-gray-200 h-12 w-12"></div>
+        <p className="ml-4 text-lg font-semibold">Loading data...</p>
+      </div>
+    );
+  }
 
   return (
     <div className="p-4">

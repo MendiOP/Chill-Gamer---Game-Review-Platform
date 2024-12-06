@@ -51,7 +51,7 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: "/myreviews",
+        path: "/myReviews",
         element: (
           <PrivateRoute>
             <MyReviews></MyReviews>
@@ -59,7 +59,7 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: "/gamewatchlist",
+        path: "/myWatchlist",
         element: (
           <PrivateRoute>
             <GameWatchlist></GameWatchlist>

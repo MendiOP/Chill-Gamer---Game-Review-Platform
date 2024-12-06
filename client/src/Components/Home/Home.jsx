@@ -11,7 +11,7 @@ const Home = () => {
   let isHomePath = location.pathname === "/";
 
   return (
-    <div className="border border-blue-500 md:w-2/3 mx-auto">
+    <div className="border border-blue-500 md:w-full lg:w-2/3 mx-auto">
       <header>
         <Header />
       </header>

@@ -2,6 +2,9 @@ import { updateProfile } from "firebase/auth";
 import React, { useContext, useState } from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { Link, Navigate } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import Swal from "sweetalert2";
 import { AuthContext } from "../../AuthContext/AuthContext";
 
 const Register = () => {
@@ -46,6 +49,11 @@ const Register = () => {
           photoURL: photoUrl,
         }).then(() => {
           console.log("Registration successful!");
+          Swal.fire({
+            title: `Hello ${name}!`,
+            text: "You have successfully Registered!",
+            icon: "success",
+          });
           setIsRegistered(true);
         });
       })
@@ -79,6 +87,7 @@ const Register = () => {
 
   return (
     <div className="flex min-h-screen items-center justify-center bg-gray-100 px-4">
+      <ToastContainer />
       <div className="w-full max-w-lg bg-white p-8 rounded-xl shadow-md space-y-6">
         <h1 className="text-2xl font-semibold text-gray-700 text-center">
           Create an Account

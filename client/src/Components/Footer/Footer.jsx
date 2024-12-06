@@ -8,7 +8,7 @@ import logo from "../../assets/logo.jpg";
 
 const Footer = () => {
   return (
-    <footer className="footer bg-gray-100 text-gray-700 py-8 flex flex-col">
+    <footer className="footer bg-gray-100 text-gray-700 py-8 flex flex-col mt-14">
       {/* Logo Section */}
       <div className="mb-8 mx-auto">
         <div className="flex items-center space-x-2">

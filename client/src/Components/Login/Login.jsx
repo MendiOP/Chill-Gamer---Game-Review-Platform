@@ -1,6 +1,9 @@
 import { useContext, useState } from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { Link, useLocation, useNavigate } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import Swal from "sweetalert2";
 import { AuthContext } from "../../AuthContext/AuthContext";
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -20,8 +23,12 @@ const Login = () => {
 
     setLoading(true);
     signInUser(email, password)
-      .then((user) => {
-        console.log(user);
+      .then((userCredential) => {
+        Swal.fire({
+          title: `Welcome Back ${userCredential.user.displayName}!`,
+          text: "You have successfully Logged In!",
+          icon: "success",
+        });
         navigate(from, { replace: true });
       })
       .catch((error) => {
@@ -35,14 +42,23 @@ const Login = () => {
   };
 
   const handleGoogleLogin = () => {
+    setLoading(true);
     signInWithGoogle()
       .then((result) => {
         const user = result.user;
         console.log("Google Sign-In successful:", user);
+        Swal.fire({
+          title: `Welcome ${user.displayName}!`,
+          text: "You have successfully Logged In!",
+          icon: "success",
+        });
         navigate(from, { replace: true });
       })
       .catch((error) => {
         console.error("Google Sign-In error:", error);
+      })
+      .finally(() => {
+        setLoading(false);
       });
   };
 
@@ -191,6 +207,7 @@ const Login = () => {
           </Link>
         </p>
       </div>
+      <ToastContainer />
     </div>
   );
 };

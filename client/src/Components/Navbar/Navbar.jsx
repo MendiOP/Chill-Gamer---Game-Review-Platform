@@ -80,7 +80,7 @@ const Navbar = () => {
                 </li>
                 <li>
                   <NavLink
-                    to="/myreviews"
+                    to="/myReviews"
                     className={({ isActive }) =>
                       isActive
                         ? "hover:text-blue-600 active"
@@ -92,7 +92,7 @@ const Navbar = () => {
                 </li>
                 <li>
                   <NavLink
-                    to="/gamewatchlist"
+                    to="/myWatchlist"
                     className={({ isActive }) =>
                       isActive
                         ? "hover:text-blue-600 active"
@@ -159,7 +159,7 @@ const Navbar = () => {
               </li>
               <li>
                 <NavLink
-                  to="/myreviews"
+                  to="/myReviews"
                   className={({ isActive }) =>
                     isActive
                       ? "hover:text-blue-600 active"
@@ -171,7 +171,7 @@ const Navbar = () => {
               </li>
               <li>
                 <NavLink
-                  to="/gamewatchlist"
+                  to="/myWatchlist"
                   className={({ isActive }) =>
                     isActive
                       ? "hover:text-blue-600 active"
