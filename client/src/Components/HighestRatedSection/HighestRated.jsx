@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import sad from "../../assets/sad.gif";
 import HighestCard from "./HighestCard";
 
 const HighestRated = () => {
@@ -19,6 +20,25 @@ const HighestRated = () => {
         setLoading(false);
       });
   }, []);
+
+  // to show nothing in default
+  if (games.length === 0) {
+    return (
+      <div className="text-center text-2xl mt-16 p-8 bg-gray-100 border-2 border-gray-300 rounded-lg shadow-md max-w-lg mx-auto">
+        <div className="text-purple-600 font-bold text-3xl mb-6">
+          No Games &#128542;
+        </div>
+        <img
+          src={sad}
+          alt="sad"
+          className="w-1/2 rounded-xl mx-auto mb-6" // Adjust size and spacing for the image
+        />
+        <div className="text-gray-700 text-xl font-semibold">
+          There is no Games available at the moment. Please check back later.
+        </div>
+      </div>
+    );
+  }
 
   if (loading) {
     return (

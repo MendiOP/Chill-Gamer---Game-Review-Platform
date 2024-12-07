@@ -48,7 +48,7 @@ const MyReviews = () => {
   // default div to show nothing in yourreviews
   if (reviews.length === 0) {
     return (
-      <div className="text-center text-2xl mt-16 p-8 bg-gray-100 border-2 border-gray-300 rounded-lg shadow-md max-w-md mx-auto">
+      <div className="text-center text-2xl mt-16 p-8 bg-gray-100 border-2 border-gray-300 rounded-lg shadow-md max-w-lg mx-auto">
         <div className="text-purple-600 font-bold text-3xl mb-6">
           No reviews in your list.
         </div>

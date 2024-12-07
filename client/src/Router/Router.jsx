@@ -1,6 +1,6 @@
 import React from "react";
 import { createBrowserRouter } from "react-router-dom";
-import ErrorLayout from "../Components/ErrorLayout/ErrorLayout";
+import Error from "../Components/ErrorPage/Error";
 import HighestRated from "../Components/HighestRatedSection/HighestRated";
 import Home from "../Components/Home/Home";
 import ReviewDetails from "../Components/ReviewDetails/ReviewDetails";
@@ -78,11 +78,11 @@ const router = createBrowserRouter([
         path: "/highestrated",
         element: <HighestRated></HighestRated>,
       },
-      {
-        path: "*",
-        element: <ErrorLayout />,
-      },
     ],
+  },
+  {
+    path: "*",
+    element: <Error />,
   },
 ]);
 
