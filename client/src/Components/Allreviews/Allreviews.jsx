@@ -4,8 +4,8 @@ import ReviewCard from "./ReviewCard";
 
 const Allreviews = () => {
   const [reviews, setReviews] = useState([]);
+  const [filteredReviews, setFilteredReviews] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [sortedGames, setSortedGames] = useState([]);
 
   useEffect(() => {
     setLoading(true);
@@ -13,6 +13,7 @@ const Allreviews = () => {
       .then((res) => res.json())
       .then((data) => {
         setReviews(data);
+        setFilteredReviews(data);
         setTimeout(() => setLoading(false), 500);
       })
       .catch((error) => {
@@ -21,6 +22,30 @@ const Allreviews = () => {
       });
   }, []);
 
+  const handleFilter = (event) => {
+    const genre = event.target.value;
+    const filteredGames =
+      genre === "default"
+        ? reviews
+        : reviews.filter((game) => game.genre === genre);
+    setFilteredReviews(filteredGames);
+  };
+
+  const handleSort = (event) => {
+    const value = event.target.value;
+    const field = value.split("-")[0];
+    const order = value.split("-")[1];
+    const sortedGames = [...filteredReviews].sort((a, b) => {
+      if (order === "asc") {
+        return a[field] - b[field];
+      } else {
+        return b[field] - a[field];
+      }
+    });
+
+    setFilteredReviews(sortedGames);
+  };
+
   // default div to show nothing in yourreviews
   if (reviews.length === 0) {
     return (
@@ -28,11 +53,7 @@ const Allreviews = () => {
         <div className="text-purple-600 font-bold text-3xl mb-6">
           No reviews &#128542;
         </div>
-        <img
-          src={sad}
-          alt="sad"
-          className="w-1/2 rounded-xl mx-auto mb-6" // Adjust size and spacing for the image
-        />
+        <img src={sad} alt="sad" className="w-1/2 rounded-xl mx-auto mb-6" />
         <div className="text-gray-700 text-xl font-semibold">
           There is no reviews available at the moment. Please check back later.
         </div>
@@ -51,12 +72,12 @@ const Allreviews = () => {
 
   return (
     <div className="mt-10 mb-10 space-y-10 border border-black">
-      <div className="flex justify-between">
-        <h1 className="font-bold text-xl md:text-3xl text-center">
-          Popular Games You can give a try
+      <div className="flex flex-col md:flex-row justify-between gap-3">
+        <h1 className="font-bold text-3xl md:text-4xl text-center">
+          Popular Games You Can Play
         </h1>
 
-        <div className="flex items-center gap-4">
+        <div className="flex items-center justify-center gap-4">
           <div className="flex items-center">
             <label htmlFor="Filter" className="mr-2">
               Filter:
@@ -64,8 +85,10 @@ const Allreviews = () => {
             <select
               id="Filter"
               className="select select-bordered select-sm"
-              defaultValue="Genre"
+              defaultValue="default"
+              onChange={handleFilter}
             >
+              <option value="default">Genre</option>
               <option value="Action">Action</option>
               <option value="Adventure">Adventure</option>
               <option value="RPG">RPG</option>
@@ -73,28 +96,36 @@ const Allreviews = () => {
               <option value="Simulation">Simulation</option>
             </select>
           </div>
-
           <div className="flex items-center">
-            <label htmlFor="sort" className="mr-2">
-              Sort By:
+            <label htmlFor="Sort" className="mr-2">
+              Sort:
             </label>
             <select
-              id="sort"
+              id="Sort"
               className="select select-bordered select-sm"
-              defaultValue="default"
+              defaultValue="Default"
+              onChange={handleSort}
             >
               <option value="default">Default</option>
-              <option value="year">year (Low &gt; High)</option>
-              <option value="year">year (High &gt; Low)</option>
-              <option value="rating">rating (Low &gt; High)</option>
-              <option value="rating">rating (High &gt; Low)</option>
+              <option value="publishingYear-asc">Year (Low &gt; High)</option>
+              <option value="publishingYear-dsc">Year (High &gt; Low)</option>
+              <option value="rating-asc">Rating (Low &gt; High)</option>
+              <option value="rating-dsc">Rating (High &gt; Low)</option>
             </select>
           </div>
         </div>
       </div>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 w-fit mx-auto">
-        {reviews.map((review) => {
-          return (
+
+      {filteredReviews.length === 0 ? (
+        <div className="flex flex-col items-center mt-16 justify-center border border-gray-300 rounded-lg p-6 bg-gray-50 max-w-md mx-auto shadow-md">
+          <span className="text-4xl mb-3">😔</span>
+          <p className="text-2xl font-bold text-gray-600 text-center">
+            There are no games available for this genre
+          </p>
+        </div>
+      ) : (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 w-fit mx-auto">
+          {filteredReviews.map((review) => (
             <ReviewCard
               key={review._id}
               id={review._id}
@@ -106,10 +137,10 @@ const Allreviews = () => {
               description={review.reviewDescription}
               reviewerEmail={review.userEmail}
               reviewerName={review.userName}
-            ></ReviewCard>
-          );
-        })}
-      </div>
+            />
+          ))}
+        </div>
+      )}
     </div>
   );
 };
