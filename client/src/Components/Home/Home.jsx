@@ -11,11 +11,11 @@ const Home = () => {
   let isHomePath = location.pathname === "/";
 
   return (
-    <div className="border border-blue-500 md:w-full lg:w-2/3 mx-auto">
+    <div className="md:w-full ">
       <header>
         <Header />
       </header>
-      <main>
+      <main className="lg:w-2/3 mx-auto">
         {isHomePath && (
           <>
             <Slider></Slider>

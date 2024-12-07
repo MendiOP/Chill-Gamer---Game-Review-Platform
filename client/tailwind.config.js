@@ -5,10 +5,21 @@ export default {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      textColor: {
+        faltu: 'var(--font-color)',
+      },
+      backgroundColor: {
+        faltu: 'var(--background-color)',
+      },
+      colors: {
+        link: 'var(--link-color)',
+      },
+    },
   },
   plugins: [
     require('daisyui'),
   ],
-}
+  darkMode: ['class', '[data-theme="dark"]'],
 
+}

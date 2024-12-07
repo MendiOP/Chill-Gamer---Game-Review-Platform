@@ -1,4 +1,5 @@
 import React from "react";
+import { Slide } from "react-awesome-reveal";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick-theme.css";
 import "slick-carousel/slick/slick.css";
@@ -74,26 +75,32 @@ const ImageSlider = () => {
   };
 
   return (
-    <div className="max-w-4xl mx-auto my-8">
-      <h2 className="text-center text-3xl font-bold mb-6">
-        Discover Exciting Games to Play!
-      </h2>
-      <Slider {...sliderSettings}>
-        {sliderData.map((item) => (
-          <div key={item.id} className="p-4">
-            <img
-              src={item.image}
-              alt={item.title}
-              className="w-full h-64 object-cover rounded-lg"
-            />
-            <div className="mt-4 text-center">
-              <h3 className="text-xl font-semibold">{item.title}</h3>
-              <p className="text-gray-600">{item.description}</p>
+    <Slide triggerOnce>
+      <div className="max-w-4xl mx-auto my-8">
+        <h2 className="text-center text-3xl font-bold mb-6">
+          Discover Exciting Games to Play!
+        </h2>
+        <Slider {...sliderSettings}>
+          {sliderData.map((item) => (
+            <div key={item.id} className="p-4 text-faltu">
+              <img
+                src={item.image}
+                alt={item.title}
+                className="w-full h-64 object-cover rounded-lg"
+              />
+              <div className="mt-4 text-center">
+                <h3 className="text-2xl font-bold text-teal-700 dark:text-teal-500">
+                  {item.title}
+                </h3>
+                <p className="text-gray-600 dark:text-faltu">
+                  {item.description}
+                </p>
+              </div>
             </div>
-          </div>
-        ))}
-      </Slider>
-    </div>
+          ))}
+        </Slider>
+      </div>
+    </Slide>
   );
 };
 

@@ -75,13 +75,13 @@ const MyReviews = () => {
   }
 
   return (
-    <div className="p-4">
-      <h1 className="text-3xl font-bold text-center mb-6 text-black">
+    <div className="p-4 text-faltu">
+      <h1 className="text-3xl font-bold text-center mb-6 text-faltu">
         Game Reviews
       </h1>
-      <div className="overflow-x-auto">
-        <table className="table w-full border-2 border-gray-300 rounded-lg">
-          <thead className="bg-indigo-500 text-white text-lg">
+      <div className="overflow-x-auto ">
+        <table className="table w-full border-b-2  rounded-lg bg-faltu">
+          <thead className="bg-[#005F73] text-white text-lg">
             <tr>
               <th className="p-4 text-left">Game Title</th>
               <th className="p-4 text-left hidden lg:table-cell">
@@ -96,24 +96,22 @@ const MyReviews = () => {
             {reviews.map((review) => (
               <tr
                 key={review._id}
-                className="hover:bg-indigo-100 transition-all text-lg"
+                className="hover:bg-gray-200 dark:hover:bg-[#005F73] transition-all duration-300 text-lg"
               >
-                <td className="p-4 border-b">{review.gameTitle}</td>
-                <td className="p-4 border-b hidden lg:table-cell">
+                <td className="p-4 ">{review.gameTitle}</td>
+                <td className="p-4  hidden lg:table-cell">
                   {review.reviewDescription.length > 50
                     ? review.reviewDescription.substring(0, 50) + "..."
                     : review.reviewDescription}
                 </td>
-                <td className="p-4 border-b hidden md:table-cell">
-                  {review.rating}/5
-                </td>
-                <td className="p-4 border-b">{review.genre}</td>
-                <td className="p-4 border-b space-y-2">
-                  <button className="bg-blue-500 text-white px-4 py-2 rounded-lg mr-4 hover:bg-blue-600 transition">
+                <td className="p-4  hidden md:table-cell">{review.rating}/5</td>
+                <td className="p-4 ">{review.genre}</td>
+                <td className="p-4 space-y-2">
+                  <button className="bg-blue-500 px-4 py-2 rounded-lg mr-4 hover:bg-blue-600 hover:shadow-lg dark:hover:shadow-indigo-700 transition-all duration-300">
                     <Link to={`/updateReview/${review._id}`}>Update</Link>
                   </button>
                   <button
-                    className="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600 transition"
+                    className="bg-red-500 px-4 py-2 rounded-lg hover:bg-red-600 hover:shadow-lg dark:hover:shadow-red-700 transition-all duration-300"
                     onClick={() => handleDelete(review._id)}
                   >
                     Delete
