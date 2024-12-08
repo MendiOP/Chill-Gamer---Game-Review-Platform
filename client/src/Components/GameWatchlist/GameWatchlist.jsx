@@ -40,7 +40,7 @@ const GameWatchlist = () => {
   if (usersWatchList.length === 0) {
     // Show "No Games Found" message when the watchlist is empty
     return (
-      <div className="flex justify-center items-center h-screen bg-gray-50">
+      <div className="flex justify-center items-center h-screen bg-gray-50 dark:bg-faltu">
         <div className="text-center p-8 bg-white border border-gray-200 rounded-xl shadow-lg max-w-lg">
           <h2 className="text-purple-600 font-extrabold text-2xl md:text-3xl mb-6">
             No Games Found!
