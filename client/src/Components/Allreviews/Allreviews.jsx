@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Helmet } from "react-helmet";
 import sad from "../../assets/sad.gif";
 import ReviewCard from "./ReviewCard";
 
@@ -50,6 +51,10 @@ const Allreviews = () => {
   if (reviews.length === 0) {
     return (
       <div className="text-center text-2xl mt-16 p-8 bg-gray-100 border-2 border-gray-300 rounded-lg shadow-md max-w-lg mx-auto">
+        <Helmet>
+          <meta charSet="utf-8" />
+          <title>All Reviews | Chill Gamer</title>
+        </Helmet>
         <div className="text-purple-600 font-bold text-3xl mb-6">
           No reviews &#128542;
         </div>
@@ -64,6 +69,10 @@ const Allreviews = () => {
   if (loading) {
     return (
       <div className="flex justify-center items-center min-h-screen">
+        <Helmet>
+          <meta charSet="utf-8" />
+          <title>All Reviews | Chill Gamer</title>
+        </Helmet>
         <div className="loader ease-linear rounded-full border-4 border-t-4 border-gray-200 h-12 w-12"></div>
         <p className="ml-4 text-lg font-semibold">Loading data...</p>
       </div>
@@ -72,6 +81,10 @@ const Allreviews = () => {
 
   return (
     <div className="mt-10 mb-10 space-y-10">
+      <Helmet>
+        <meta charSet="utf-8" />
+        <title>All Reviews | Chill Gamer</title>
+      </Helmet>
       <div className="flex flex-col md:flex-row justify-between gap-3">
         <h1 className="font-bold text-3xl md:text-4xl text-center">
           Popular Games You Can Play

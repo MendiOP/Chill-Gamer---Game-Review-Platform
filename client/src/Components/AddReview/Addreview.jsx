@@ -1,4 +1,5 @@
 import React, { useContext, useState } from "react";
+import { Helmet } from "react-helmet";
 import { FaCalendarAlt, FaImage, FaPen, FaStar } from "react-icons/fa";
 import Swal from "sweetalert2";
 import { AuthContext } from "../../AuthContext/AuthContext";
@@ -58,6 +59,10 @@ const AddNewReview = () => {
 
   return (
     <div className="max-w-3xl mx-auto p-8 bg-gradient-to-r from-teal-400 to-indigo-600 rounded-xl shadow-2xl mt-10 mb-10">
+      <Helmet>
+        <meta charSet="utf-8" />
+        <title>Add New Review | Chill Gamer</title>
+      </Helmet>
       <h2 className="text-4xl font-extrabold text-white mb-6 text-center">
         Add New Review
       </h2>

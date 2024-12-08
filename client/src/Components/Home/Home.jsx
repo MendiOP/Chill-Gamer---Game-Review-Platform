@@ -1,5 +1,6 @@
 import React from "react";
 import { Slide } from "react-awesome-reveal";
+import Helmet from "react-helmet";
 import { Outlet, useLocation } from "react-router-dom";
 import Footer from "../Footer/Footer";
 import Comparison from "../GameComparison/Comparison";
@@ -15,6 +16,10 @@ const Home = () => {
 
   return (
     <Slide triggerOnce>
+      <Helmet>
+        <meta charSet="utf-8" />
+        <title>Home | Chill Gamer</title>
+      </Helmet>
       <div className="md:w-full overflow-x-hidden font-body">
         <header>
           <Header />

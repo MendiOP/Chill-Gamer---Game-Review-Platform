@@ -1,4 +1,5 @@
 import React, { useContext } from "react";
+import { Helmet } from "react-helmet";
 import { useLoaderData } from "react-router-dom";
 import Swal from "sweetalert2";
 import { AuthContext } from "../../AuthContext/AuthContext";
@@ -60,6 +61,10 @@ const ReviewDetails = () => {
 
   return (
     <div className="container mx-auto p-6 bg-gradient-to-b from-gray-50 to-gray-200 shadow-lg rounded-lg">
+      <Helmet>
+        <meta charSet="utf-8" />
+        <title>Review Details | Chill Gamer</title>
+      </Helmet>
       <div className="flex flex-col md:flex-row gap-6">
         {/* Game Cover */}
         <div className="w-full md:w-2/3">

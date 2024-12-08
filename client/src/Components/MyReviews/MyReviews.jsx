@@ -1,4 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
+import { Helmet } from "react-helmet";
 import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
 import { AuthContext } from "../../AuthContext/AuthContext";
@@ -49,6 +50,10 @@ const MyReviews = () => {
   if (reviews.length === 0) {
     return (
       <div className="text-center text-2xl mt-16 p-8 bg-gray-100 border-2 border-gray-300 rounded-lg shadow-md max-w-lg mx-auto">
+        <Helmet>
+          <meta charSet="utf-8" />
+          <title>My Reviews | Chill Gamer</title>
+        </Helmet>
         <div className="text-purple-600 font-bold text-3xl mb-6">
           No reviews in your list.
         </div>
@@ -68,6 +73,10 @@ const MyReviews = () => {
   if (reviews.length === 0 && loading) {
     return (
       <div className="flex justify-center items-center min-h-screen">
+        <Helmet>
+          <meta charSet="utf-8" />
+          <title>My Reviews | Chill Gamer</title>
+        </Helmet>
         <div className="loader ease-linear rounded-full border-4 border-t-4 border-gray-200 h-12 w-12"></div>
         <p className="ml-4 text-lg font-semibold">Loading data...</p>
       </div>
@@ -76,6 +85,10 @@ const MyReviews = () => {
 
   return (
     <div className="p-4 text-faltu">
+      <Helmet>
+        <meta charSet="utf-8" />
+        <title>My Reviews | Chill Gamer</title>
+      </Helmet>
       <h1 className="text-3xl font-bold text-center mb-6 text-faltu">
         Game Reviews
       </h1>

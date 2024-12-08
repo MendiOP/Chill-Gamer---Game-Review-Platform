@@ -1,4 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
+import { Helmet } from "react-helmet";
 import { AuthContext } from "../../AuthContext/AuthContext";
 import sad from "../../assets/sad.gif";
 
@@ -27,6 +28,10 @@ const GameWatchlist = () => {
     // Show loading spinner while data is being fetched
     return (
       <div className="flex justify-center items-center h-screen bg-gray-50">
+        <Helmet>
+          <meta charSet="utf-8" />
+          <title>Game Watchlist | Chill Gamer</title>
+        </Helmet>
         <div className="text-center">
           <div className="animate-spin rounded-full border-4 border-t-4 border-purple-500 h-12 w-12 mx-auto"></div>
           <p className="mt-4 text-gray-600 text-lg font-semibold">
@@ -41,6 +46,10 @@ const GameWatchlist = () => {
     // Show "No Games Found" message when the watchlist is empty
     return (
       <div className="flex justify-center items-center h-screen bg-gray-50 dark:bg-faltu">
+        <Helmet>
+          <meta charSet="utf-8" />
+          <title>Game Watchlist | Chill Gamer</title>
+        </Helmet>
         <div className="text-center p-8 bg-white border border-gray-200 rounded-xl shadow-lg max-w-lg">
           <h2 className="text-purple-600 font-extrabold text-2xl md:text-3xl mb-6">
             No Games Found!
@@ -60,6 +69,10 @@ const GameWatchlist = () => {
 
   return (
     <div className="overflow-x-auto  mt-10 bg-faltu">
+      <Helmet>
+        <meta charSet="utf-8" />
+        <title>Game Watchlist | Chill Gamer</title>
+      </Helmet>
       <h1 className="text-center font-bold text-3xl text-faltu mt-6">
         Your Watchlist: Favorites
       </h1>
