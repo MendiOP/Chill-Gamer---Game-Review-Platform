@@ -12,7 +12,9 @@ const MyReviews = () => {
 
   useEffect(() => {
     setLoading(true);
-    fetch(`http://localhost:5000/myReviews?email=${user.email}`)
+    fetch(
+      `https://chill-gamer-server-omega-orcin.vercel.app/myReviews?email=${user.email}`
+    )
       .then((res) => res.json())
       .then((data) => {
         setReviews(data);
@@ -31,9 +33,12 @@ const MyReviews = () => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`http://localhost:5000/deleteReview/${id}`, {
-          method: "DELETE",
-        })
+        fetch(
+          `https://chill-gamer-server-omega-orcin.vercel.app/deleteReview/${id}`,
+          {
+            method: "DELETE",
+          }
+        )
           .then((res) => res.json())
           .then((data) => {
             if (data.deletedCount > 0) {

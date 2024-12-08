@@ -10,7 +10,7 @@ const GameWatchlist = () => {
 
   useEffect(() => {
     setLoading(true);
-    fetch("http://localhost:5000/watchlist")
+    fetch("https://chill-gamer-server-omega-orcin.vercel.app/watchlist")
       .then((res) => res.json())
       .then((data) => {
         setWatchListDatas(data);

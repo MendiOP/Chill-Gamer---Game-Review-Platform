@@ -28,7 +28,7 @@ const AddNewReview = () => {
 
     console.log("Review submitted:", reviewData);
 
-    fetch("http://localhost:5000/addReview", {
+    fetch("https://chill-gamer-server-omega-orcin.vercel.app/addReview", {
       method: "POST",
       headers: {
         "content-type": "application/json",
