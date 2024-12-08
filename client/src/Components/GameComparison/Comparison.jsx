@@ -20,7 +20,7 @@ const Comparison = () => {
         <h1 className="text-4xl font-semibold">Game Comparison</h1>
         <p className="mt-2">Compare the best games side by side!</p>
       </header>
-      <main className="py-8 dark:bg-faltu">
+      <main className="py-8 ">
         <GameComparisonSlider game1={game1} game2={game2} />
       </main>
     </div>
