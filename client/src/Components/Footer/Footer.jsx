@@ -8,25 +8,27 @@ import logo from "../../assets/logo.jpg";
 
 const Footer = () => {
   return (
-    <footer className="footer bg-gray-100 text-gray-700 py-8 flex flex-col mt-14">
+    <footer className="footer bg-gray-100 text-gray-700 py-8 flex flex-col items-center justify-center mt-14">
       {/* Logo Section */}
       <div className="mb-8 mx-auto">
-        <div className="flex items-center space-x-2">
+        <div className="flex flex-col sm:flex-row items-center space-y-4 sm:space-y-0 sm:space-x-2">
           <img
             src={logo}
             alt="Chill Gamer Logo"
             className="w-14 h-14 rounded-full"
           />
-          <span className="text-3xl font-bold">Just Chill & Play</span>
+          <span className="text-3xl font-bold text-center sm:text-left">
+            Just Chill & Play
+          </span>
         </div>
       </div>
 
       {/* Links Section */}
-      <div className="container mx-auto flex flex-col md:flex-row justify-around mb-8">
+      <div className="container mx-auto flex flex-col md:flex-row justify-around mb-8 w-full">
         {/* Overview Section */}
-        <div className="mb-8 md:mb-0">
+        <div className="mb-8 md:mb-0 w-full md:w-auto">
           <h3 className="text-lg font-semibold mb-4">Overview</h3>
-          <ul className="space-y-2">
+          <ul className="space-y-2 text-center">
             <li>About</li>
             <li>Help Center</li>
             <li>Careers</li>
@@ -38,9 +40,9 @@ const Footer = () => {
         </div>
 
         {/* Follow Us Section */}
-        <div className="mb-8 md:mb-0">
+        <div className="mb-8 md:mb-0 w-full md:w-auto">
           <h3 className="text-lg font-semibold mb-4">Follow Us</h3>
-          <div className="flex justify-center space-x-4">
+          <div className="flex justify-center sm:justify-start space-x-4">
             <a
               href="https://www.facebook.com/PUBGMOBILE.BD.OFFICIAL"
               aria-label="Facebook"
@@ -66,20 +68,36 @@ const Footer = () => {
         </div>
 
         {/* Explore Other Brands Section */}
-        <div>
+        <div className="w-full md:w-auto">
           <h3 className="text-lg font-semibold mb-4">Explore Other Brands</h3>
-          <ul className="space-y-2 ">
-            <li>
-              <img className="w-16 h-16 rounded-lg" src={game1} alt="Game 1" />
+          <ul className="flex flex-wrap justify-center items-center gap-3 sm:justify-start">
+            <li className="w-16 h-16 mb-2">
+              <img
+                className="w-full h-full rounded-lg"
+                src={game1}
+                alt="Game 1"
+              />
             </li>
-            <li>
-              <img className="w-16 h-16 rounded-lg" src={game2} alt="Game 2" />
+            <li className="w-16 h-16 mb-2">
+              <img
+                className="w-full h-full rounded-lg"
+                src={game2}
+                alt="Game 2"
+              />
             </li>
-            <li>
-              <img className="w-16 h-16 rounded-lg" src={game3} alt="Game 3" />
+            <li className="w-16 h-16 mb-2">
+              <img
+                className="w-full h-full rounded-lg"
+                src={game3}
+                alt="Game 3"
+              />
             </li>
-            <li>
-              <img className="w-16 h-16 rounded-lg" src={game4} alt="Game 4" />
+            <li className="w-16 h-16 mb-2">
+              <img
+                className="w-full h-full rounded-lg"
+                src={game4}
+                alt="Game 4"
+              />
             </li>
           </ul>
         </div>
