@@ -1,6 +1,6 @@
 # 🎮 Gaming Review Website
 
-[**Live Link**](https://your-live-link.com)
+[**Live Link**](https://chill-gamer-op.netlify.app/)
 
 An immersive and modern **gaming review platform** built to unite gamers worldwide! Discover an extensive library of games, write and upload reviews, compare games, and personalize your experience with watchlists and sorting tools. This project delivers an exceptional user experience with cutting-edge features and a sleek, **purple-themed design**.
 
