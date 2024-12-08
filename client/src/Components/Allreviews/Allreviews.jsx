@@ -73,7 +73,7 @@ const Allreviews = () => {
           <h1 className="font-bold text-3xl md:text-4xl text-center">
             Popular Games You Can Play
           </h1>
-          <div className="flex items-center justify-center gap-4">
+          <div className="flex items-center flex-col md:flex-row justify-center gap-4">
             <div className="flex items-center">
               <label htmlFor="Filter" className="mr-2">
                 Filter:
