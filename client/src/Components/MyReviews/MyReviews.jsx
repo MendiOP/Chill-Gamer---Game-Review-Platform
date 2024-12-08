@@ -13,7 +13,7 @@ const MyReviews = () => {
   useEffect(() => {
     if (user?.email) {
       fetch(
-        `https://vercel.com/mehedi-hasans-projects-0390240f/myReviews?email=${user.email}`
+        `https://chill-gamer-server-omega-orcin.vercel.app/myReviews?email=${user.email}`
       )
         .then((res) => res.json())
         .then((data) => {
@@ -39,7 +39,7 @@ const MyReviews = () => {
     }).then((result) => {
       if (result.isConfirmed) {
         fetch(
-          `https://vercel.com/mehedi-hasans-projects-0390240f/deleteReview/${id}`,
+          `https://chill-gamer-server-omega-orcin.vercel.app/deleteReview/${id}`,
           {
             method: "DELETE",
           }

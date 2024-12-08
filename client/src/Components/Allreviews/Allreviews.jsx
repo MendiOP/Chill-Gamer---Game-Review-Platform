@@ -16,7 +16,7 @@ const Allreviews = () => {
     const genreQuery =
       selectedGenre !== "default" ? `?genre=${selectedGenre}` : "";
     fetch(
-      `https://vercel.com/mehedi-hasans-projects-0390240f/reviews${genreQuery}`
+      `https://chill-gamer-server-omega-orcin.vercel.app/reviews${genreQuery}`
     )
       .then((res) => res.json())
       .then((data) => {

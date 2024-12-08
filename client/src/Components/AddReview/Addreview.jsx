@@ -29,7 +29,7 @@ const AddNewReview = () => {
 
     console.log("Review submitted:", reviewData);
 
-    fetch("https://vercel.com/mehedi-hasans-projects-0390240f/addReview", {
+    fetch("https://chill-gamer-server-omega-orcin.vercel.app/addReview", {
       method: "POST",
       headers: {
         "content-type": "application/json",

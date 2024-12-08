@@ -31,7 +31,7 @@ const Update = () => {
     console.log("Review submitted:", reviewData);
 
     fetch(
-      `https://vercel.com/mehedi-hasans-projects-0390240f/updateReview/${gameData._id}`,
+      `https://chill-gamer-server-omega-orcin.vercel.app/updateReview/${gameData._id}`,
       {
         method: "PUT",
         headers: {

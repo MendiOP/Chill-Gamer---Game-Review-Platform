@@ -11,7 +11,7 @@ const GameWatchlist = () => {
 
   useEffect(() => {
     setLoading(true);
-    fetch("https://vercel.com/mehedi-hasans-projects-0390240f/watchlist")
+    fetch("https://chill-gamer-server-omega-orcin.vercel.app/watchlist")
       .then((res) => res.json())
       .then((data) => {
         setWatchListDatas(data);
