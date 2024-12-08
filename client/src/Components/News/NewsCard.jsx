@@ -6,17 +6,15 @@ const NewsCard = ({ obj, index }) => {
   return (
     <div className="w-full lg:w-full p-4">
       {" "}
-      {/* Full width on all screens */}
       <div
-        className={`bg-white border rounded-lg shadow-md overflow-hidden flex flex-col lg:flex-row ${
+        className={`bg-white border dark:border-none rounded-lg shadow-md overflow-hidden flex flex-col lg:flex-row ${
           isEven ? "" : "lg:flex-row-reverse"
         }`}
       >
-        {/* Image Section */}
         <img
           src={obj.imageUrl}
           alt={obj.title}
-          className="w-full h-full lg:w-1/2 object-cover" // Image takes full width on small screens, half on large screens
+          className="w-full lg:w-1/2 object-cover"
         />
 
         {/* Content Section */}
@@ -37,6 +35,7 @@ const NewsCard = ({ obj, index }) => {
           </p>
           <a
             href={obj.readMoreLink}
+            target="_blank"
             className="mt-4 inline-block bg-blue-600 text-white text-center py-2 px-4 rounded-lg shadow hover:bg-blue-500"
           >
             {obj.buttonText}

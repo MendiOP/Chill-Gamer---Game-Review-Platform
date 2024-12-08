@@ -15,6 +15,9 @@ export default {
       colors: {
         link: 'var(--link-color)',
       },
+      fontFamily:{
+        body:['Audiowide']
+      }
     },
   },
   plugins: [

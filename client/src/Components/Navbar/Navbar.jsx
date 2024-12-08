@@ -202,8 +202,8 @@ const Navbar = () => {
           >
             <img
               src={user ? user.photoURL : demouser}
-              className="rounded-full"
-              alt="User Profile"
+              className="rounded-full dark:bg-faltu"
+              alt="User"
             />
           </button>
           <Tooltip id="my-tooltip" />
@@ -213,7 +213,7 @@ const Navbar = () => {
             <>
               <Link
                 to="/login"
-                className="btn btn-outline border-gray-300 text-gray-700 hover:border-gray-500 hover:bg-gray-500 text-sm md:text-base"
+                className="btn btn-outline border-gray-300 text-gray-700 dark:text-faltu hover:border-gray-500 hover:bg-gray-500 text-sm md:text-base"
               >
                 Login
               </Link>

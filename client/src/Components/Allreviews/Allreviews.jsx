@@ -71,7 +71,7 @@ const Allreviews = () => {
   }
 
   return (
-    <div className="mt-10 mb-10 space-y-10 border border-black">
+    <div className="mt-10 mb-10 space-y-10">
       <div className="flex flex-col md:flex-row justify-between gap-3">
         <h1 className="font-bold text-3xl md:text-4xl text-center">
           Popular Games You Can Play

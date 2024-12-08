@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 const GameCard = ({ id, gameTitle, rating, gameCover, releaseDate }) => {
   return (
-    <div className="relative max-w-md mx-auto rounded-lg overflow-hidden shadow-md border border-gray-200 h-[20rem]">
+    <div className="relative max-w-md mx-auto rounded-lg overflow-hidden shadow-md border border-gray-200 dark:border-none h-[20rem]">
       {/* Background Image */}
       <img
         src={gameCover}

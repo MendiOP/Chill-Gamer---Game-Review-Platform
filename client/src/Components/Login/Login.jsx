@@ -72,8 +72,8 @@ const Login = () => {
   }
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-gray-100 px-4">
-      <div className="w-full max-w-md bg-white p-8 rounded-xl shadow-md space-y-6">
+    <div className="flex min-h-fit justify-center bg-gray-100 px-4 mt-10 dark:bg-faltu">
+      <div className="w-full max-w-md bg-white p-8 rounded-xl shadow-md space-y-6 dark:bg-teal-500">
         {/* Form Title */}
         <h1 className="text-2xl font-semibold text-gray-700 text-center">
           Login to Your Account
@@ -99,7 +99,7 @@ const Login = () => {
               </span>
               <input
                 type="email"
-                className="w-full px-4 py-2 text-gray-700 focus:outline-none"
+                className="w-full px-4 py-2 text-gray-700 focus:outline-none dark:text-faltu"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="Enter your email"
@@ -132,7 +132,7 @@ const Login = () => {
               {/* Password Input */}
               <input
                 type={showPassword ? "text" : "password"}
-                className="w-full px-4 py-2 text-gray-700 focus:outline-none"
+                className="w-full px-4 py-2 text-gray-700 focus:outline-none dark:text-faltu"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="Enter your password"

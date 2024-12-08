@@ -86,9 +86,9 @@ const Register = () => {
   }
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-gray-100 px-4">
+    <div className="flex min-h-fit mt-10 items-center justify-center bg-gray-100 px-4 dark:bg-faltu">
       <ToastContainer />
-      <div className="w-full max-w-lg bg-white p-8 rounded-xl shadow-md space-y-6">
+      <div className="w-full max-w-lg bg-white p-8 rounded-xl shadow-md space-y-6 dark:bg-teal-600">
         <h1 className="text-2xl font-semibold text-gray-700 text-center">
           Create an Account
         </h1>
