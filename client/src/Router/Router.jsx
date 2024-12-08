@@ -31,7 +31,7 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: "/review/:id",
+        path: "/reviews/:id",
         loader: ({ params }) =>
           fetch(
             `https://chill-gamer-server-omega-orcin.vercel.app/reviews/${params.id}`

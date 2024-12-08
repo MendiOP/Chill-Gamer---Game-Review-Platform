@@ -39,7 +39,7 @@ const ReviewCard = ({ id, image, title, review, rating, year, genre }) => {
         </div>
       </div>
       <button className="w-1/2 py-2 bg-teal-500 text-white text-center font-semibold rounded-lg mt-3 mb-2 transform transition-all duration-200 ease-in-out hover:bg-teal-600 active:scale-95 mx-auto">
-        <Link to={`/review/${id}`}>Explore Details</Link>
+        <Link to={`/reviews/${id}`}>Explore Details</Link>
       </button>
     </div>
   );
