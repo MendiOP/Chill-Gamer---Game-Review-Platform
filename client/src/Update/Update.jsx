@@ -7,12 +7,14 @@ import { AuthContext } from "../AuthContext/AuthContext";
 const Update = () => {
   const gameData = useLoaderData();
   const { user } = useContext(AuthContext);
-  const [gameCover, setGameCover] = useState("");
-  const [gameTitle, setGameTitle] = useState("");
-  const [reviewDescription, setReviewDescription] = useState("");
-  const [rating, setRating] = useState(1);
-  const [publishingYear, setPublishingYear] = useState("");
-  const [genre, setGenre] = useState("Action");
+  const [gameCover, setGameCover] = useState(gameData.gameCover);
+  const [gameTitle, setGameTitle] = useState(gameData.gameTitle);
+  const [reviewDescription, setReviewDescription] = useState(
+    gameData.reviewDescription
+  );
+  const [rating, setRating] = useState(gameData.rating);
+  const [publishingYear, setPublishingYear] = useState(gameData.publishingYear);
+  const [genre, setGenre] = useState(gameData.genre);
 
   const handleSubmit = (e) => {
     e.preventDefault();
