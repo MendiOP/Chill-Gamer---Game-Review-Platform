@@ -8,18 +8,23 @@ import sad from "../../assets/sad.gif";
 const MyReviews = () => {
   const { user } = useContext(AuthContext);
   const [reviews, setReviews] = useState([]);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true); // Default to true so loading is shown initially
 
   useEffect(() => {
-    setLoading(true);
-    fetch(
-      `https://chill-gamer-server-omega-orcin.vercel.app/myReviews?email=${user.email}`
-    )
-      .then((res) => res.json())
-      .then((data) => {
-        setReviews(data);
-        setTimeout(() => setLoading(false), 5000);
-      });
+    if (user?.email) {
+      fetch(
+        `https://vercel.com/mehedi-hasans-projects-0390240f/myReviews?email=${user.email}`
+      )
+        .then((res) => res.json())
+        .then((data) => {
+          setReviews(data);
+          setLoading(false); // Set loading to false after data is fetched
+        })
+        .catch((error) => {
+          console.error("Error fetching reviews:", error);
+          setLoading(false); // Even if there's an error, stop the loading state
+        });
+    }
   }, [user?.email]);
 
   const handleDelete = (id) => {
@@ -34,7 +39,7 @@ const MyReviews = () => {
     }).then((result) => {
       if (result.isConfirmed) {
         fetch(
-          `https://chill-gamer-server-omega-orcin.vercel.app/deleteReview/${id}`,
+          `https://vercel.com/mehedi-hasans-projects-0390240f/deleteReview/${id}`,
           {
             method: "DELETE",
           }
@@ -51,31 +56,8 @@ const MyReviews = () => {
     });
   };
 
-  // default div to show nothing in yourreviews
-  if (reviews.length === 0) {
-    return (
-      <div className="text-center text-2xl mt-16 p-8 bg-gray-100 border-2 border-gray-300 rounded-lg shadow-md max-w-lg mx-auto">
-        <Helmet>
-          <meta charSet="utf-8" />
-          <title>My Reviews | Chill Gamer</title>
-        </Helmet>
-        <div className="text-purple-600 font-bold text-3xl mb-6">
-          No reviews in your list.
-        </div>
-        <img
-          src={sad}
-          alt="sad"
-          className="w-1/2 rounded-xl mx-auto mb-6" // Adjust size and spacing for the image
-        />
-        <div className="text-gray-700 text-xl font-semibold">
-          You haven't added any reviews to the community yet. Start browsing and
-          write your favorites!
-        </div>
-      </div>
-    );
-  }
-
-  if (reviews.length === 0 && loading) {
+  // Show the loading spinner initially
+  if (loading) {
     return (
       <div className="flex justify-center items-center min-h-screen">
         <Helmet>
@@ -88,6 +70,27 @@ const MyReviews = () => {
     );
   }
 
+  // Show no reviews message if there are no reviews
+  if (reviews.length === 0) {
+    return (
+      <div className="text-center text-2xl mt-16 p-8 bg-gray-100 border-2 border-gray-300 rounded-lg shadow-md max-w-lg mx-auto">
+        <Helmet>
+          <meta charSet="utf-8" />
+          <title>My Reviews | Chill Gamer</title>
+        </Helmet>
+        <div className="text-purple-600 font-bold text-3xl mb-6">
+          No reviews in your list.
+        </div>
+        <img src={sad} alt="sad" className="w-1/2 rounded-xl mx-auto mb-6" />
+        <div className="text-gray-700 text-xl font-semibold">
+          You haven't added any reviews to the community yet. Start browsing and
+          write your favorites!
+        </div>
+      </div>
+    );
+  }
+
+  // Show the reviews if they exist
   return (
     <div className="p-4 text-faltu">
       <Helmet>

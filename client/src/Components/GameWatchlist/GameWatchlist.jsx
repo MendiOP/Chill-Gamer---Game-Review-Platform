@@ -1,4 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
+import { Fade } from "react-awesome-reveal";
 import { Helmet } from "react-helmet";
 import { AuthContext } from "../../AuthContext/AuthContext";
 import sad from "../../assets/sad.gif";
@@ -10,7 +11,7 @@ const GameWatchlist = () => {
 
   useEffect(() => {
     setLoading(true);
-    fetch("https://chill-gamer-server-omega-orcin.vercel.app/watchlist")
+    fetch("https://vercel.com/mehedi-hasans-projects-0390240f/watchlist")
       .then((res) => res.json())
       .then((data) => {
         setWatchListDatas(data);
@@ -68,128 +69,132 @@ const GameWatchlist = () => {
   }
 
   return (
-    <div className="overflow-x-auto  mt-10 bg-faltu">
-      <Helmet>
-        <meta charSet="utf-8" />
-        <title>Game Watchlist | Chill Gamer</title>
-      </Helmet>
-      <h1 className="text-center font-bold text-3xl text-faltu mt-6">
-        Your Watchlist: Favorites
-      </h1>
-      {/* Desktop Table */}
-      <div className="overflow-x-auto">
-        <table className="table-auto w-full border-collapse mt-6 bg-faltu shadow-lg rounded-lg hidden md:table">
-          <thead className="bg-teal-500">
-            <tr>
-              <th className="px-6 py-5 text-center text-lg text-white">
-                Game Cover
-              </th>
-              <th className="px-6 py-5 text-center text-lg text-white">
-                Game Title
-              </th>
-              <th className="px-6 py-5 text-center text-lg text-white">
-                Genre
-              </th>
-              <th className="px-6 py-5 text-center text-lg text-white">
-                Published Year
-              </th>
-              <th className="px-6 py-5 text-center text-lg text-white">
-                Rating
-              </th>
-              <th className="px-6 py-5 text-center text-lg text-white hidden lg:table-cell">
-                Review
-              </th>
-              <th className="px-6 py-5 text-center text-lg text-white">
-                Author
-              </th>
-            </tr>
-          </thead>
-          <tbody className="text-lg">
-            {usersWatchList.map((game) => (
-              <tr
-                key={game._id}
-                className="border-b hover:bg-gray-200 dark:hover:bg-[#005F73] transition-all"
-              >
-                <td className="px-6 py-5 text-center">
-                  <img
-                    src={game.gameCover}
-                    alt={game.gameTitle}
-                    className="w-24 h-24 object-cover rounded-lg mx-auto"
-                  />
-                </td>
-                <td className="px-6 py-5 text-center">{game.gameTitle}</td>
-                <td className="px-6 py-5 text-center">{game.genre}</td>
-                <td className="px-6 py-5 text-center">{game.publishingYear}</td>
-                <td className="px-6 py-5 text-center text-yellow-500 font-bold">
-                  {game.rating}
-                </td>
-                <td className="px-6 py-5 text-center max-w-xs truncate hidden lg:table-cell">
-                  {game.reviewDescription}
-                </td>
-                <td className="px-6 py-5 text-center">{game.userName}</td>
+    <Fade>
+      <div className="overflow-x-auto  mt-10 bg-faltu">
+        <Helmet>
+          <meta charSet="utf-8" />
+          <title>Game Watchlist | Chill Gamer</title>
+        </Helmet>
+        <h1 className="text-center font-bold text-3xl text-faltu mt-6">
+          Your Watchlist: Favorites
+        </h1>
+        {/* Desktop Table */}
+        <div className="overflow-x-auto">
+          <table className="table-auto w-full border-collapse mt-6 bg-faltu shadow-lg rounded-lg hidden md:table">
+            <thead className="bg-teal-500">
+              <tr>
+                <th className="px-6 py-5 text-center text-lg text-white">
+                  Game Cover
+                </th>
+                <th className="px-6 py-5 text-center text-lg text-white">
+                  Game Title
+                </th>
+                <th className="px-6 py-5 text-center text-lg text-white">
+                  Genre
+                </th>
+                <th className="px-6 py-5 text-center text-lg text-white">
+                  Published Year
+                </th>
+                <th className="px-6 py-5 text-center text-lg text-white">
+                  Rating
+                </th>
+                <th className="px-6 py-5 text-center text-lg text-white hidden lg:table-cell">
+                  Review
+                </th>
+                <th className="px-6 py-5 text-center text-lg text-white">
+                  Author
+                </th>
               </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+            </thead>
+            <tbody className="text-lg">
+              {usersWatchList.map((game) => (
+                <tr
+                  key={game._id}
+                  className="border-b hover:bg-gray-200 dark:hover:bg-[#005F73] transition-all"
+                >
+                  <td className="px-6 py-5 text-center">
+                    <img
+                      src={game.gameCover}
+                      alt={game.gameTitle}
+                      className="w-24 h-24 object-cover rounded-lg mx-auto"
+                    />
+                  </td>
+                  <td className="px-6 py-5 text-center">{game.gameTitle}</td>
+                  <td className="px-6 py-5 text-center">{game.genre}</td>
+                  <td className="px-6 py-5 text-center">
+                    {game.publishingYear}
+                  </td>
+                  <td className="px-6 py-5 text-center text-yellow-500 font-bold">
+                    {game.rating}
+                  </td>
+                  <td className="px-6 py-5 text-center max-w-xs truncate hidden lg:table-cell">
+                    {game.reviewDescription}
+                  </td>
+                  <td className="px-6 py-5 text-center">{game.userName}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
 
-      {/* Mobile Cards */}
-      <div className="md:hidden p-4">
-        {usersWatchList.map((game) => (
-          <div
-            key={game._id}
-            className="bg-white border border-gray-300 rounded-xl shadow-md p-6 mb-6 hover:shadow-lg transition-all"
-          >
-            <div className="flex flex-col items-center mb-4">
-              <img
-                src={game.gameCover}
-                alt={game.gameTitle}
-                className="w-32 h-32 object-cover rounded-lg"
-              />
-              <h3 className="mt-4 text-lg font-bold text-purple-700">
-                {game.gameTitle}
-              </h3>
+        {/* Mobile Cards */}
+        <div className="md:hidden p-4">
+          {usersWatchList.map((game) => (
+            <div
+              key={game._id}
+              className="bg-white border border-gray-300 rounded-xl shadow-md p-6 mb-6 hover:shadow-lg transition-all"
+            >
+              <div className="flex flex-col items-center mb-4">
+                <img
+                  src={game.gameCover}
+                  alt={game.gameTitle}
+                  className="w-32 h-32 object-cover rounded-lg"
+                />
+                <h3 className="mt-4 text-lg font-bold text-purple-700">
+                  {game.gameTitle}
+                </h3>
+              </div>
+              <div className="space-y-2">
+                <div>
+                  <span className="block text-gray-500 font-semibold">
+                    Genre:
+                  </span>
+                  <span className="block text-lg">{game.genre}</span>
+                </div>
+                <div>
+                  <span className="block text-gray-500 font-semibold">
+                    Published Year:
+                  </span>
+                  <span className="block text-lg">{game.publishingYear}</span>
+                </div>
+                <div>
+                  <span className="block text-gray-500 font-semibold">
+                    Rating:
+                  </span>
+                  <span className="block text-lg text-yellow-500 font-bold">
+                    {game.rating}
+                  </span>
+                </div>
+                <div>
+                  <span className="block text-gray-500 font-semibold">
+                    Review:
+                  </span>
+                  <span className="block text-sm line-clamp-3">
+                    {game.reviewDescription}
+                  </span>
+                </div>
+                <div>
+                  <span className="block text-gray-500 font-semibold">
+                    Author:
+                  </span>
+                  <span className="block text-lg">{game.userName}</span>
+                </div>
+              </div>
             </div>
-            <div className="space-y-2">
-              <div>
-                <span className="block text-gray-500 font-semibold">
-                  Genre:
-                </span>
-                <span className="block text-lg">{game.genre}</span>
-              </div>
-              <div>
-                <span className="block text-gray-500 font-semibold">
-                  Published Year:
-                </span>
-                <span className="block text-lg">{game.publishingYear}</span>
-              </div>
-              <div>
-                <span className="block text-gray-500 font-semibold">
-                  Rating:
-                </span>
-                <span className="block text-lg text-yellow-500 font-bold">
-                  {game.rating}
-                </span>
-              </div>
-              <div>
-                <span className="block text-gray-500 font-semibold">
-                  Review:
-                </span>
-                <span className="block text-sm line-clamp-3">
-                  {game.reviewDescription}
-                </span>
-              </div>
-              <div>
-                <span className="block text-gray-500 font-semibold">
-                  Author:
-                </span>
-                <span className="block text-lg">{game.userName}</span>
-              </div>
-            </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
-    </div>
+    </Fade>
   );
 };
 

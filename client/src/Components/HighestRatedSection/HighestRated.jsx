@@ -8,7 +8,7 @@ const HighestRated = () => {
 
   useEffect(() => {
     setLoading(true);
-    fetch("https://chill-gamer-server-omega-orcin.vercel.app/reviews")
+    fetch("https://vercel.com/mehedi-hasans-projects-0390240f/reviews")
       .then((res) => res.json())
       .then((data) => {
         setTimeout(() => setLoading(false), 500);

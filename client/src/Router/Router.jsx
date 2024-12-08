@@ -34,7 +34,7 @@ const router = createBrowserRouter([
         path: "/review/:id",
         loader: ({ params }) =>
           fetch(
-            `https://chill-gamer-server-omega-orcin.vercel.app/reviews/${params.id}`
+            `https://vercel.com/mehedi-hasans-projects-0390240f/reviews/${params.id}`
           ),
         element: (
           <PrivateRoute>
@@ -46,7 +46,7 @@ const router = createBrowserRouter([
         path: "/updateReview/:id",
         loader: ({ params }) =>
           fetch(
-            `https://chill-gamer-server-omega-orcin.vercel.app/updateReview/${params.id}`
+            `https://vercel.com/mehedi-hasans-projects-0390240f/updateReview/${params.id}`
           ),
         element: (
           <PrivateRoute>

@@ -26,7 +26,7 @@ const ReviewDetails = () => {
 
   // probably the best function i wrote in this project
   const handleWatchlist = () => {
-    fetch("https://chill-gamer-server-omega-orcin.vercel.app/watchlist", {
+    fetch("https://vercel.com/mehedi-hasans-projects-0390240f/watchlist", {
       method: "POST",
       headers: {
         "content-type": "application/json",
